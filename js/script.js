@@ -37,7 +37,7 @@ const GameController = (function () {
         [2, 4, 6]  // Top-right to bottom-left diagonal
     ];
 
-    //const players = [];
+    const players = [];
     let currentPlayer = 'X';
     const board = GameBoard.returnBoard();
 
@@ -59,13 +59,40 @@ const GameController = (function () {
         }
     }
 
-    const playGame = () => {
-        var input = prompt("Which cell to add mark?");
-        GameBoard.placeMark(input, currentPlayer);
-        currentPlayer = currentPlayer == "X" ? "O" : "X";
+    const startGame = () => {
+        // Reset board
+
+
+        // Create players
+
+
+        // Start playing rounds
+        playRound();
     }
 
-    return { checkForWin, checkForDraw, playGame };
+    const playRound = () => {
+
+
+        while (!checkForWin() && !checkForDraw()) {
+
+            var input = prompt("Which cell to add mark?");
+            GameBoard.placeMark(input, currentPlayer);
+            currentPlayer = currentPlayer == "X" ? "O" : "X";
+
+            GameBoard.printInfo();
+        }
+
+        const winner = GameController.checkForWin();
+
+        if (winner) {
+            console.log(`Player ${winner} wins!`);
+        } else {
+            console.log('No winner yet.');
+        }
+
+    }
+
+    return { checkForWin, checkForDraw, startGame, playRound };
 })();
 
 
@@ -74,39 +101,10 @@ const DisplayController = (function () {
     return {};
 })();
 
-function createPlayer(name) {
-    const score = 0;
-    return { name, score };
+function createPlayer(name, mark) {
+    return { name, mark };
 }
 
 
 
-while (!GameController.checkForWin() && !GameController.checkForDraw()) {
-
-    GameController.playGame();
-    GameBoard.printInfo();
-    /*
-    console.log("CALLED?")
-    GameBoard.placeMark(0, 'X');
-    GameBoard.placeMark(1, 'O');
-    GameBoard.placeMark(2, 'X');
-    GameBoard.placeMark(3, 'O');
-    GameBoard.placeMark(4, 'O');
-    GameBoard.placeMark(5, 'O');
-    GameBoard.placeMark(6, 'X');
-    GameBoard.placeMark(7, 'O');
-    GameBoard.placeMark(8, 'X');
-    //break;
-    //}
-    */
-}
-
-
-
-const winner = GameController.checkForWin();
-
-if (winner) {
-    console.log(`Player ${winner} wins!`);
-} else {
-    console.log('No winner yet.');
-}
+GameController.startGame();
