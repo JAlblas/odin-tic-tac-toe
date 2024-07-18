@@ -46,16 +46,18 @@ const GameController = (function () {
         for (let condition of winConditions) {
             const [a, b, c] = condition;
             if (board[a] !== null && board[b] !== null && board[c] !== null && board[a] === board[b] && board[a] === board[c]) {
-                return board[a]; // Return 'X' or 'O'
+                return true // Return 'X' or 'O'
             }
         }
-        return null;
+        return false;
     }
 
     const checkForDraw = () => {
         if (board.every(cell => cell != null)) {
             alert("DRAW");
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -72,20 +74,27 @@ const GameController = (function () {
 
     const playRound = () => {
 
+        let isWin = false;
+        let isDraw = false;
 
-        while (!checkForWin() && !checkForDraw()) {
+        while (!isWin && !isDraw) {
 
             var input = prompt("Which cell to add mark?");
             GameBoard.placeMark(input, currentPlayer);
-            currentPlayer = currentPlayer == "X" ? "O" : "X";
 
             GameBoard.printInfo();
+
+            isWin = checkForWin();
+            isDraw = checkForDraw();
+
+            if (!isWin) {
+                currentPlayer = currentPlayer == "X" ? "O" : "X";
+            }
+
         }
 
-        const winner = GameController.checkForWin();
-
-        if (winner) {
-            console.log(`Player ${winner} wins!`);
+        if (isWin) {
+            console.log(`Player ${currentPlayer} wins!`);
         } else {
             console.log('No winner yet.');
         }
