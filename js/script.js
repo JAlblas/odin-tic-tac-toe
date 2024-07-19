@@ -37,8 +37,9 @@ const GameController = (function () {
         [2, 4, 6]  // Top-right to bottom-left diagonal
     ];
 
-    const players = [];
-    let currentPlayer = 'X';
+    let players = [];
+    let currentPlayer = 0
+        ;
     const board = GameBoard.returnBoard();
 
     const checkForWin = () => {
@@ -63,10 +64,10 @@ const GameController = (function () {
 
     const startGame = () => {
         // Reset board
-
+        GameBoard.resetBoard();
 
         // Create players
-
+        players = [createPlayer(0, "Player 1", "X"), createPlayer(1, "Player 2", "O")];
 
         // Start playing rounds
         playRound();
@@ -80,7 +81,7 @@ const GameController = (function () {
         while (!isWin && !isDraw) {
 
             var input = prompt("Which cell to add mark?");
-            GameBoard.placeMark(input, currentPlayer);
+            GameBoard.placeMark(input, players[currentPlayer].mark);
 
             GameBoard.printInfo();
 
@@ -88,7 +89,7 @@ const GameController = (function () {
             isDraw = checkForDraw();
 
             if (!isWin) {
-                currentPlayer = currentPlayer == "X" ? "O" : "X";
+                currentPlayer = currentPlayer == 0 ? 1 : 0;
             }
 
         }
@@ -110,8 +111,8 @@ const DisplayController = (function () {
     return {};
 })();
 
-function createPlayer(name, mark) {
-    return { name, mark };
+function createPlayer(id, name, mark) {
+    return { id, name, mark };
 }
 
 
