@@ -16,8 +16,10 @@ const GameBoard = (function () {
         return false;
     }
 
-    const isValidNode = () => {
-        return true;
+    const isValidNode = (index) => {
+        console.log("US _tghsi ")
+        console.log(index);
+        return board[index] === null;
     }
 
     const printInfo = () => console.log(board);
@@ -80,17 +82,29 @@ const GameController = (function () {
 
         while (!isWin && !isDraw) {
 
-            var input = prompt("Which cell to add mark?");
-            GameBoard.placeMark(input, players[currentPlayer].mark);
+            var input = Number(prompt("Which cell to add mark?"));
+            console.log(typeof (input));
+            console.log("TTT");
+            if (GameBoard.isValidNode(input)) {
 
-            GameBoard.printInfo();
+                GameBoard.placeMark(input, players[currentPlayer].mark);
 
-            isWin = checkForWin();
-            isDraw = checkForDraw();
+                GameBoard.printInfo();
 
-            if (!isWin) {
-                currentPlayer = currentPlayer == 0 ? 1 : 0;
+                isWin = checkForWin();
+
+
+                if (!isWin) {
+                    isDraw = checkForDraw();
+                    if (!isDraw) {
+                        currentPlayer = currentPlayer == 0 ? 1 : 0;
+                    }
+
+                }
+            } else {
+                console.log("INVALID");
             }
+
 
         }
 
