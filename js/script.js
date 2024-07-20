@@ -80,33 +80,33 @@ const GameController = (function () {
         let isWin = false;
         let isDraw = false;
 
-        while (!isWin && !isDraw) {
+        //while (!isWin && !isDraw) {
 
-            var input = Number(prompt("Which cell to add mark?"));
-            console.log(typeof (input));
-            console.log("TTT");
-            if (GameBoard.isValidNode(input)) {
+        var input = Number(prompt("Which cell to add mark?"));
+        console.log(typeof (input));
+        console.log("TTT");
+        if (GameBoard.isValidNode(input)) {
 
-                GameBoard.placeMark(input, players[currentPlayer].mark);
+            GameBoard.placeMark(input, players[currentPlayer].mark);
 
-                GameBoard.printInfo();
+            GameBoard.printInfo();
 
-                isWin = checkForWin();
+            isWin = checkForWin();
 
 
-                if (!isWin) {
-                    isDraw = checkForDraw();
-                    if (!isDraw) {
-                        currentPlayer = currentPlayer == 0 ? 1 : 0;
-                    }
-
+            if (!isWin) {
+                isDraw = checkForDraw();
+                if (!isDraw) {
+                    currentPlayer = currentPlayer == 0 ? 1 : 0;
                 }
-            } else {
-                console.log("INVALID");
+
             }
-
-
+        } else {
+            console.log("INVALID");
         }
+
+
+        //}
 
         if (isWin) {
             console.log(`Player ${currentPlayer} wins!`);
