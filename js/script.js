@@ -5,7 +5,9 @@ const GameBoard = (function () {
     const returnBoard = () => board;
 
     const resetBoard = () => {
-        Array(9).fill(null);
+        for (let i = 0; i < board.length; i++) {
+            board[i] = null;
+        }
     }
 
     const placeMark = (position, mark) => {
@@ -38,8 +40,8 @@ const GameController = (function () {
     ];
 
     let players = [];
-    let currentPlayer = 0
-        ;
+    let currentPlayerIndex = 0;
+
     const board = GameBoard.returnBoard();
 
     const checkForWin = () => {
@@ -73,14 +75,23 @@ const GameController = (function () {
         //playRound();
     }
 
-    const playRound = (index) => {
+    const changePlayer = () => {
+        currentPlayerIndex = currentPlayerIndex == 0 ? 1 : 0;
+        console.log(currentPlayerIndex)
+        const currentPlayer = players[currentPlayerIndex];
+        console.log(currentPlayer);
+        DisplayController.updatePlayerUI(currentPlayer);
+    }
+
+    const playRound = (index, squareElement) => {
 
         let isWin = false;
         let isDraw = false;
 
         if (GameBoard.isValidNode(index)) {
 
-            GameBoard.placeMark(index, players[currentPlayer].mark);
+            GameBoard.placeMark(index, players[currentPlayerIndex].mark);
+            DisplayController.updateSquare(squareElement, players[currentPlayerIndex].mark);
 
             GameBoard.printInfo();
 
@@ -90,7 +101,8 @@ const GameController = (function () {
             if (!isWin) {
                 isDraw = checkForDraw();
                 if (!isDraw) {
-                    currentPlayer = currentPlayer == 0 ? 1 : 0;
+                    console.log("changing player");
+                    changePlayer();
                 }
 
             }
@@ -99,7 +111,7 @@ const GameController = (function () {
         }
 
         if (isWin) {
-            console.log(`Player ${currentPlayer} wins!`);
+            console.log(`Player ${players[currentPlayerIndex].name} wins!`);
         } else {
             console.log('No winner yet.');
         }
@@ -111,8 +123,18 @@ const GameController = (function () {
 
 
 const DisplayController = (function () {
+    const playerHeader = document.querySelector('.player');
 
-    return {};
+    const updatePlayerUI = (currentPlayer) => {
+        console.log(currentPlayer);
+        playerHeader.textContent = `Player: ${currentPlayer.mark}`;
+    }
+
+    const updateSquare = (squareElement, mark) => {
+        squareElement.innerText = mark;
+    }
+
+    return { updatePlayerUI, updateSquare };
 })();
 
 function createPlayer(id, name, mark) {
@@ -124,7 +146,8 @@ squares.forEach(square => {
 
     square.addEventListener("click", () => {
         const index = square.dataset.index;
-        GameController.playRound(index);
+        GameController.playRound(index, square);
+
     })
 });
 
