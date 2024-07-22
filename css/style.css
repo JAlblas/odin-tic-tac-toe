@@ -47,4 +47,9 @@ h4 {
 
 .square {
     background-color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 6rem;
 }
