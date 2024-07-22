@@ -8,6 +8,8 @@ const GameBoard = (function () {
         for (let i = 0; i < board.length; i++) {
             board[i] = null;
         }
+
+        DisplayController.resetSquares();
     }
 
     const placeMark = (position, mark) => {
@@ -101,7 +103,6 @@ const GameController = (function () {
             if (!isWin) {
                 isDraw = checkForDraw();
                 if (!isDraw) {
-                    console.log("changing player");
                     changePlayer();
                 }
 
@@ -134,7 +135,16 @@ const DisplayController = (function () {
         squareElement.innerText = mark;
     }
 
-    return { updatePlayerUI, updateSquare };
+    const resetSquares = () => {
+
+        const squares = document.querySelectorAll('.square');
+        squares.forEach(square => {
+
+            square.innerHTML = "";
+        });
+    }
+
+    return { updatePlayerUI, updateSquare, resetSquares };
 })();
 
 function createPlayer(id, name, mark) {
@@ -150,5 +160,10 @@ squares.forEach(square => {
 
     })
 });
+
+const button = document.querySelector('input');
+button.addEventListener("click", () => {
+    GameBoard.resetBoard();
+})
 
 GameController.startGame();

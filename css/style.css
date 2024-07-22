@@ -28,9 +28,26 @@ h1 {
     font-size: 2.5rem;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
 h4 {
     margin: 20px 0px;
     font-size: 1.4rem;
+}
+
+input {
+    background-color: var(--bg-color);
+    padding: 10px;
+    border: 1px solid #FFF;
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .board {
@@ -52,4 +69,5 @@ h4 {
     justify-content: center;
     color: #FFF;
     font-size: 6rem;
+    cursor: pointer;
 }
