@@ -20,7 +20,7 @@
         <h1>Tic Tac Toe</h1>
         <div class="header">
             <h4 class="player">Player: X</h4>
-            <input type="button" value="Start new game">
+            <input type="button" value="Start new game" id="new-game-button">
         </div>
 
         <div class="board">
@@ -33,6 +33,18 @@
             <div class="square" data-index="6"></div>
             <div class="square" data-index="7"></div>
             <div class="square" data-index="8"></div>
+        </div>
+
+        <div id="side-menu" class="side-menu">
+            <a href="" class="close-button">&times;</a>
+            <h2>New Game</h2>
+            <form id="player-form">
+                <label for="player1">Player 1 Name:</label>
+                <input type="text" id="player1" name="player1">
+                <label for="player2">Player 2 Name:</label>
+                <input type="text" id="player2" name="player2">
+                <button type="submit">Start Game</button>
+            </form>
         </div>
     </div>
 </body>

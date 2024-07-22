@@ -40,7 +40,8 @@ h4 {
     font-size: 1.4rem;
 }
 
-input {
+input,
+button {
     background-color: var(--bg-color);
     padding: 10px;
     border: 1px solid #FFF;
@@ -48,6 +49,12 @@ input {
     border-radius: 5px;
     font-size: 1.1rem;
     cursor: pointer;
+}
+
+button {
+    background-color: #FFF;
+    color: var(--bg-color);
+    margin-top: 10px;
 }
 
 .board {
@@ -70,4 +77,48 @@ input {
     color: #FFF;
     font-size: 6rem;
     cursor: pointer;
+}
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #FFF;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    background-color: var(--bg-color);
+    padding-left: 25px;
+    color: #FFF;
+}
+
+.side-menu a {
+    padding: 8px 8px 8px 32px;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.side-menu input {
+    background-color: #FFF;
+    color: #000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.side-menu label {
+    margin-bottom: 15px;
+}
+
+.side-menu .close-button {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+    color: #FFF;
 }

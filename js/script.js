@@ -66,9 +66,13 @@ const GameController = (function () {
         }
     }
 
-    const startGame = () => {
+    const startGame = (players) => {
         // Reset board
         GameBoard.resetBoard();
+
+        currentPlayerIndex = 0;
+
+        DisplayController.updatePlayerUI();
 
         // Create players
         players = [createPlayer(0, "Player 1", "X"), createPlayer(1, "Player 2", "O")];
@@ -161,9 +165,43 @@ squares.forEach(square => {
     })
 });
 
+/*
 const button = document.querySelector('input');
 button.addEventListener("click", () => {
     GameBoard.resetBoard();
 })
+*/
+
+
+document.querySelector('#new-game-button').addEventListener('click', function () {
+    console.log("GI")
+    document.querySelector('#side-menu').style.width = '250px';
+});
+
+document.querySelector('.close-button').addEventListener('click', function () {
+    document.getElementById('side-menu').style.width = '0';
+});
+/*
+window.addEventListener('click', function (event) {
+    if (event.target !== document.getElementById('side-menu') && event.target !== document.getElementById('new-game-btn')) {
+        document.getElementById('side-menu').style.width = '0';
+    }
+});
+*/
+document.getElementById('player-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const player1 = document.getElementById('player1').value;
+    const player2 = document.getElementById('player2').value;
+
+
+    alert(`Starting game between ${player1} and ${player2}`);
+    document.getElementById('side-menu').style.width = '0';
+
+
+    // Add player names
+    GameController.startGame();
+});
+
+
 
 GameController.startGame();
