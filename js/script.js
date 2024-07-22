@@ -17,8 +17,6 @@ const GameBoard = (function () {
     }
 
     const isValidNode = (index) => {
-        console.log("US _tghsi ")
-        console.log(index);
         return board[index] === null;
     }
 
@@ -72,22 +70,17 @@ const GameController = (function () {
         players = [createPlayer(0, "Player 1", "X"), createPlayer(1, "Player 2", "O")];
 
         // Start playing rounds
-        playRound();
+        //playRound();
     }
 
-    const playRound = () => {
+    const playRound = (index) => {
 
         let isWin = false;
         let isDraw = false;
 
-        //while (!isWin && !isDraw) {
+        if (GameBoard.isValidNode(index)) {
 
-        var input = Number(prompt("Which cell to add mark?"));
-        console.log(typeof (input));
-        console.log("TTT");
-        if (GameBoard.isValidNode(input)) {
-
-            GameBoard.placeMark(input, players[currentPlayer].mark);
+            GameBoard.placeMark(index, players[currentPlayer].mark);
 
             GameBoard.printInfo();
 
@@ -104,9 +97,6 @@ const GameController = (function () {
         } else {
             console.log("INVALID");
         }
-
-
-        //}
 
         if (isWin) {
             console.log(`Player ${currentPlayer} wins!`);
@@ -129,6 +119,13 @@ function createPlayer(id, name, mark) {
     return { id, name, mark };
 }
 
+const squares = document.querySelectorAll('.square');
+squares.forEach(square => {
 
+    square.addEventListener("click", () => {
+        const index = square.dataset.index;
+        GameController.playRound(index);
+    })
+});
 
 GameController.startGame();

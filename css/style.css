@@ -1,5 +1,6 @@
 :root {
-    --bg-color: #f54;
+    --bg-color: #DF455A;
+    --board-size: 600px;
 }
 
 body,
@@ -14,7 +15,7 @@ html {
 
 .container {
     background-color: #FFF;
-    width: 1200px;
+    width: var(--board-size);
     height: 100%;
     margin: 0 auto;
 
@@ -27,8 +28,14 @@ h1 {
     font-size: 2.5rem;
 }
 
+h4 {
+    margin: 20px 0px;
+    font-size: 1.4rem;
+}
+
 .board {
-    height: 1200px;
+    width: var(--board-size);
+    height: var(--board-size);
     background-color: #FFF;
     border-radius: 5px;
     display: grid;
