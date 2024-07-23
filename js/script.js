@@ -42,6 +42,7 @@ const GameController = (function () {
 
     let players = [];
     let currentPlayerIndex = 0;
+    let gameOver = false;
 
     const board = GameBoard.returnBoard();
 
@@ -57,7 +58,6 @@ const GameController = (function () {
 
     const checkForDraw = () => {
         if (board.every(cell => cell != null)) {
-            alert("DRAW");
             return true;
         } else {
             return false;
@@ -67,6 +67,7 @@ const GameController = (function () {
     const startGame = (player1, player2) => {
         // Reset board
         GameBoard.resetBoard();
+        gameOver = false;
 
         currentPlayerIndex = 0;
 
@@ -83,6 +84,7 @@ const GameController = (function () {
     }
 
     const playRound = (index, squareElement) => {
+        if (gameOver) return; // Disable board if game is over
 
         let isWin = false;
         let isDraw = false;
@@ -108,6 +110,7 @@ const GameController = (function () {
 
         if (isWin) {
             DisplayController.showWinMessage(players[currentPlayerIndex]);
+            gameOver = true;
         }
 
     }
@@ -170,8 +173,6 @@ document.getElementById('player-form').addEventListener('submit', function (even
     const player1 = document.getElementById('player1').value;
     const player2 = document.getElementById('player2').value;
 
-
-    alert(`Starting game between ${player1} and ${player2}`);
     document.getElementById('side-menu').style.width = '0';
 
     // Add player names
