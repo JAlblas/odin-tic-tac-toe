@@ -24,9 +24,8 @@ const GameBoard = (function () {
         return board[index] === null;
     }
 
-    const printInfo = () => console.log(board);
 
-    return { returnBoard, resetBoard, placeMark, isValidNode, printInfo };
+    return { returnBoard, resetBoard, placeMark, isValidNode };
 })();
 
 const GameController = (function () {
@@ -47,7 +46,6 @@ const GameController = (function () {
     const board = GameBoard.returnBoard();
 
     const checkForWin = () => {
-        console.log("CHECKING WIN")
         for (let condition of winConditions) {
             const [a, b, c] = condition;
             if (board[a] !== null && board[b] !== null && board[c] !== null && board[a] === board[b] && board[a] === board[c]) {
@@ -75,14 +73,12 @@ const GameController = (function () {
         // Create players
         players = [createPlayer(0, player1, "X"), createPlayer(1, player2, "O")];
 
-        DisplayController.updatePlayerUI();
+        DisplayController.updatePlayerUI(players[currentPlayerIndex]);
     }
 
     const changePlayer = () => {
         currentPlayerIndex = currentPlayerIndex == 0 ? 1 : 0;
-        console.log(currentPlayerIndex)
         const currentPlayer = players[currentPlayerIndex];
-        console.log(currentPlayer);
         DisplayController.updatePlayerUI(currentPlayer);
     }
 
@@ -93,12 +89,8 @@ const GameController = (function () {
 
         if (GameBoard.isValidNode(index)) {
 
-            console.log(players);
-            console.log(currentPlayerIndex);
             GameBoard.placeMark(index, players[currentPlayerIndex].mark);
             DisplayController.updateSquare(squareElement, players[currentPlayerIndex].mark);
-
-            GameBoard.printInfo();
 
             isWin = checkForWin();
 
@@ -115,9 +107,7 @@ const GameController = (function () {
         }
 
         if (isWin) {
-            console.log(`Player ${players[currentPlayerIndex].name} wins!`);
-        } else {
-            console.log('No winner yet.');
+            DisplayController.showWinMessage(players[currentPlayerIndex]);
         }
 
     }
@@ -130,12 +120,15 @@ const DisplayController = (function () {
     const playerHeader = document.querySelector('.player');
 
     const updatePlayerUI = (currentPlayer) => {
-        console.log(currentPlayer);
         playerHeader.textContent = `Player: ${currentPlayer.name}`;
     }
 
     const updateSquare = (squareElement, mark) => {
         squareElement.innerText = mark;
+    }
+
+    const showWinMessage = (currentPlayer) => {
+        playerHeader.textContent = `The winner is: ${currentPlayer.name}`;
     }
 
     const resetSquares = () => {
@@ -147,7 +140,7 @@ const DisplayController = (function () {
         });
     }
 
-    return { updatePlayerUI, updateSquare, resetSquares };
+    return { updatePlayerUI, updateSquare, resetSquares, showWinMessage };
 })();
 
 function createPlayer(id, name, mark) {
@@ -165,7 +158,6 @@ squares.forEach(square => {
 });
 
 document.querySelector('#new-game-button').addEventListener('click', function () {
-    console.log("GI")
     document.querySelector('#side-menu').style.width = '250px';
 });
 
