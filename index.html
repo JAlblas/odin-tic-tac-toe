@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/script.js" defer></script>
     <title>Tic Tac Toe</title>
-</head>
+  </head>
 
-<body>
-    <div class="container">
-        <h1>Tic Tac Toe</h1>
-        <div class="header">
-            <h4 class="player">Player: X</h4>
-            <input type="button" value="Start new game" id="new-game-button">
-        </div>
+  <body>
+    <div id="container">
+      <h1>Tic Tac Toe</h1>
+      <header>
+        <h4 class="player">Player: X</h4>
+        <input type="button" value="Start new game" id="new-game-button" />
+      </header>
 
-        <div class="board">
-            <div class="square" data-index="0"></div>
-            <div class="square" data-index="1"></div>
-            <div class="square" data-index="2"></div>
-            <div class="square" data-index="3"></div>
-            <div class="square" data-index="4"></div>
-            <div class="square" data-index="5"></div>
-            <div class="square" data-index="6"></div>
-            <div class="square" data-index="7"></div>
-            <div class="square" data-index="8"></div>
-        </div>
+      <div id="board">
+        <div class="square" data-index="0"></div>
+        <div class="square" data-index="1"></div>
+        <div class="square" data-index="2"></div>
+        <div class="square" data-index="3"></div>
+        <div class="square" data-index="4"></div>
+        <div class="square" data-index="5"></div>
+        <div class="square" data-index="6"></div>
+        <div class="square" data-index="7"></div>
+        <div class="square" data-index="8"></div>
+      </div>
 
-        <div id="side-menu" class="side-menu">
-            <a href="" class="close-button">&times;</a>
-            <h2>New Game</h2>
-            <form id="player-form">
-                <label for="player1">Player 1 Name:</label>
-                <input type="text" id="player1" name="player1">
-                <label for="player2">Player 2 Name:</label>
-                <input type="text" id="player2" name="player2">
-                <button type="submit">Start Game</button>
-            </form>
-        </div>
+      <div id="side-menu">
+        <a href="" id="close-button">&times;</a>
+        <h2>New Game</h2>
+        <form id="player-form">
+          <label for="player1">Player 1 Name:</label>
+          <input type="text" id="player1" name="player1" />
+          <label for="player2">Player 2 Name:</label>
+          <input type="text" id="player2" name="player2" />
+          <button type="submit">Start Game</button>
+        </form>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
