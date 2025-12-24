@@ -150,42 +150,38 @@ function createPlayer(id, name, mark) {
   return { id, name, mark };
 }
 
-const squares = document.querySelectorAll(".square");
-squares.forEach((square) => {
-  square.addEventListener("click", () => {
-    const index = square.dataset.index;
-    GameController.playRound(index, square);
-  });
+const sideMenu = document.querySelector("#side-menu");
+const newGameButton = document.querySelector("#new-game-button");
+const closeButton = document.querySelector("#close-button");
+const playerForm = document.getElementById("player-form");
+const board = document.querySelector("#board");
+
+board.addEventListener("click", (e) => {
+  if (e.target.classList.contains("square")) {
+    const index = e.target.dataset.index;
+    GameController.playRound(index, e.target);
+  } else {
+    return;
+  }
 });
 
-let sideMenu = document.querySelector("#side-menu");
+newGameButton.addEventListener("click", function () {
+  sideMenu.style.width = "250px";
+});
 
-document
-  .querySelector("#new-game-button")
-  .addEventListener("click", function () {
-    sideMenu.style.width = "250px";
-  });
+closeButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  sideMenu.style.width = "0";
+});
 
-document
-  .querySelector("#close-button")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log("wgat");
-    sideMenu.style.width = "0";
-    console.log("event called");
-  });
+playerForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const player1 = document.getElementById("player1").value;
+  const player2 = document.getElementById("player2").value;
 
-document
-  .getElementById("player-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    const player1 = document.getElementById("player1").value;
-    const player2 = document.getElementById("player2").value;
+  sideMenu.style.width = "0";
 
-    document.getElementById("side-menu").style.width = "0";
-
-    // Add player names
-    GameController.startGame(player1, player2);
-  });
+  GameController.startGame(player1, player2);
+});
 
 GameController.startGame("Player 1", "Player 2");
