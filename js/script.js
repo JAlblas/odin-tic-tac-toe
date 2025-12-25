@@ -54,9 +54,10 @@ const GameController = (function () {
         board[a] === board[b] &&
         board[a] === board[c]
       ) {
-        return true; // Return 'X' or 'O'
+        return true;
       }
     }
+    // if this is reached, no winning condition is reached
     return false;
   };
 
@@ -106,6 +107,8 @@ const GameController = (function () {
         isDraw = checkForDraw();
         if (!isDraw) {
           changePlayer();
+        } else {
+          DisplayController.showDrawMessage();
         }
       }
     } else {
@@ -136,6 +139,10 @@ const DisplayController = (function () {
     playerHeader.textContent = `The winner is: ${currentPlayer.name}`;
   };
 
+  const showDrawMessage = () => {
+    playerHeader.textContent = "It's a draw!";
+  };
+
   const resetSquares = () => {
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
@@ -143,7 +150,13 @@ const DisplayController = (function () {
     });
   };
 
-  return { updatePlayerUI, updateSquare, resetSquares, showWinMessage };
+  return {
+    updatePlayerUI,
+    updateSquare,
+    resetSquares,
+    showWinMessage,
+    showDrawMessage,
+  };
 })();
 
 function createPlayer(id, name, mark) {
